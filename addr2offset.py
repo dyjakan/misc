@@ -18,13 +18,9 @@ def main():
 		print "[+] Base address at 0x%x" % (get_imagebase(ea)) # Base Address
 		print "[+] Current function at: 0x%x" % (ea) # Current cursor address
 
-	# This isn't perfect solution; is there a way to get an original file name
-	# instead of the name of IDA database?
-	fname = (idaapi.cvar.database_idb)
-	fname = fname.split('\\')
-	fname = fname[-1]
-	fname = fname.strip(".idb")
-	fname = fname.strip(".i64")
+	# lawl, I had it all the time in bblister.py (context? see original commit)
+	fname = GetInputFile()
+	fname = fname[:fname.find(".")]
 
 	print "WinDBG: bp %s+0x%x" % (fname, ea-get_imagebase(ea))
 
